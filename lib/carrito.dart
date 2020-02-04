@@ -34,10 +34,18 @@ class _pageCarrito extends State<StatefulWidget> {
             onPressed: (){
               generarCompra(cliente.codigo).then((onValue){
                 print(onValue);
-                Toast.show(
-                    "Se realizó la compra exitosamente", context,
-                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                Navigator.of(context).pop();
+                if(onValue == "OK"){
+                  Toast.show(
+                      "Se realizó la compra exitosamente", context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                  Navigator.of(context).pop();
+                }else{
+                  Toast.show(
+                      "El stock no es suficiente.", context,
+                      duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                }
+
+
               });
               
               //Toast

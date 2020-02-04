@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
+import 'package:tienda_virtual/compartir.dart';
 import 'package:tienda_virtual/modelo.dart';
 import 'package:tienda_virtual/servicios.dart';
 import 'package:toast/toast.dart';
@@ -22,19 +23,35 @@ class _FavoriteWidgetState extends State<PageProducto> {
   final Producto producto;
   final Cliente cliente;
 
-  bool isFavorite = true;
+
+
+  _FavoriteWidgetState(this.producto, this.cliente){
+    isLiked(cliente.codigo, producto.codigo).then((onValue){
+      setState(() {
+        isFavorite = onValue;
+
+      });
+
+    });
+
+    buscarProducto(producto.codigo).then((onValue){
+      setState(() {
+        _numerolike = onValue.votos;
+      });
+    });
+  }
+
+  bool isFavorite = false;// = false;
+  int _numerolike = 0;
   int _numeroProductos = 1;
-
-
-  _FavoriteWidgetState(this.producto, this.cliente);
 
   @override
   Widget build(BuildContext context) {
 
+
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-
         title: Text(producto.nombre),
       ),
       body: ListView(
@@ -50,7 +67,6 @@ class _FavoriteWidgetState extends State<PageProducto> {
           textSection(context),
           ],
         ));
-
   }
 
 
@@ -89,13 +105,15 @@ class _FavoriteWidgetState extends State<PageProducto> {
             Icons.favorite,
             color: Colors.red[500],
           ),
-          Text(producto.votos.toString()),
+          Text(_numerolike.toString()),
         ],
       ),
     );
   }
 
   Widget textSection(BuildContext context) {
+
+
 
     return Container(
       padding: const EdgeInsets.all(32),
@@ -135,15 +153,26 @@ class _FavoriteWidgetState extends State<PageProducto> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           new Material(
+
               child: InkWell(
                 onTap: () {
+                  darLike(cliente.codigo, producto.codigo, isFavorite).then((onValue){
+                    isLiked(cliente.codigo, producto.codigo).then((onValue){
+                      setState(() {
+                        isFavorite = onValue;
+                      });
+                    });
+                    buscarProducto(producto.codigo).then((onValue){
+                      setState(() {
+                        _numerolike = onValue.votos;
+                      });
+                    });
+                  }
+                  );
 
-                  setState(() {
-                    isFavorite = !isFavorite;
-                  });
                   print('Me gusta');
                 },
-                child: isFavorite ? _buildButtonColumn(Icons.favorite_border, 'ME GUSTA'): _buildButtonColumn(Icons.favorite, 'ME GUSTA'),
+                child: isFavorite ? _buildButtonColumn(Icons.favorite, 'ME GUSTA'): _buildButtonColumn(Icons.favorite_border, 'ME GUSTA'),
               )),
           new Material(
               child: InkWell(
@@ -214,6 +243,10 @@ class _FavoriteWidgetState extends State<PageProducto> {
               child: InkWell(
                 onTap: () {
                   print('compartir');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => PageCompartir(cliente: cliente, producto: producto))
+                  );
                 },
                 child: _buildButtonColumn(Icons.share, 'COMPARTIR'),
               )),
@@ -222,26 +255,3 @@ class _FavoriteWidgetState extends State<PageProducto> {
     );
   }
 }
-/*
-class MyDialogContent extends StatefulWidget {
-  final Producto producto;
-  final Cliente cliente;
-
-  const MyDialogContent({Key key, this.producto, this.cliente}) : super(key: key);
-
-  @override
-  _MyDialogContentState createState() => _MyDialogContentState(producto, cliente);
-
-}
-
-class _MyDialogContentState extends State<MyDialogContent>{
-  final Producto producto;
-  final Cliente cliente;
-
-  _MyDialogContentState(this.producto, this.cliente);
-  @override
-  Widget build(BuildContext context) {
-    return Center();
-  }
-
-}*/

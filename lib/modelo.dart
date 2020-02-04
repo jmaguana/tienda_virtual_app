@@ -32,8 +32,9 @@ class Producto{
   final String categoria;
   final int votos;
   final int cantidad;
+  final bool isLike;
 
-  Producto({this.codigo,this.nombre, this.descripcion, this.imagen, this.precio,this.categoria, this.votos, this.cantidad});
+  Producto({this.codigo,this.nombre, this.descripcion, this.imagen, this.precio,this.categoria, this.votos, this.cantidad, this.isLike});
 
   factory Producto.fromJson(Map<String, dynamic> json){
     return Producto(
@@ -44,7 +45,8 @@ class Producto{
         precio: json['precio'],
         categoria: json['categoria'],
         votos: json['votos'],
-        cantidad: json['cantidad']
+        cantidad: json['cantidad'],
+        isLike: json['isLiked']
     );
   }
 }
