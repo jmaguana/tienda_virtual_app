@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tienda_virtual/crear.dart';
 import 'package:tienda_virtual/inicio.dart';
 import 'package:tienda_virtual/servicios.dart';
 import 'package:toast/toast.dart';
@@ -107,7 +108,12 @@ class _MyHomePageState extends State<MyHomePage> {
         style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {
-
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PageCrear(),
+          ),
+        );
       },
     );
 

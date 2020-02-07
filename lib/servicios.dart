@@ -137,3 +137,21 @@ Future<void> agregarCarrito(int cantidad, int codigoProducto, int codigoCliente)
     throw Exception('Fallo agregando a carrito');
   }
 }
+
+Future<void> crearClientePOST( Cliente cliente) async {
+  final headers = {'Content-Type': 'application/json'};
+  Map<String, dynamic> body = cliente.toJson();
+  String jsonBody = json.encode(body);
+  final encoding = Encoding.getByName('utf-8');
+
+  http.Response response = await http.post(
+    servicioUrl+"clientes/crearCliente",
+    headers: headers,
+    body: jsonBody,
+    encoding: encoding,
+  );
+  print('Response status: ${response.statusCode}');
+  print('Response body: ${response.body}');
+  int statusCode = response.statusCode;
+  String responseBody = response.body;
+}

@@ -7,8 +7,10 @@ class Cliente{
   final String correo;
   final String imagen;
   final int fechaNacimiento;
+  final String telefono;
+  final String contrasenia;
 
-  Cliente({this.codigo, this.nombre, this.apellido,this.correo,this.imagen, this.fechaNacimiento});
+  Cliente({this.codigo, this.nombre, this.apellido,this.correo,this.imagen, this.fechaNacimiento, this.telefono, this.contrasenia});
 
   factory Cliente.fromJson(Map<String, dynamic> json){
     return Cliente(
@@ -17,10 +19,18 @@ class Cliente{
       apellido: json['apellido'],
       correo: json['correo'],
       imagen: json['correo'],
-      fechaNacimiento: json['fechaNacimiento']
+      fechaNacimiento: json['fechaNacimiento'],
+      telefono: json['telefono'],
+      contrasenia: json["contrasenia"],
     );
   }
-
+  Map<String, dynamic> toJson() => {
+    "nombre": nombre,
+    "contrasenia": contrasenia,
+    "apellidos": apellido,
+    "telefono": telefono,
+    "correo": correo,
+  };
 }
 
 class Producto{
