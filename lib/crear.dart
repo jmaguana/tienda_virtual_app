@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tienda_virtual/modelo.dart';
+import 'package:tienda_virtual/servicios.dart';
 import 'package:toast/toast.dart';
 
 class PageCrear extends StatefulWidget {
@@ -103,7 +104,12 @@ class _MyHomePageState extends State<PageCrear> {
                 contrasenia: passwordField.controller.text);
             print(cliente.toJson());
 
-          //  crearClientePOST(url_service, cliente);
+            crearClientePOST(cliente).then((onValue){
+              Toast.show(
+                  "Se creó el cliente correctamente.", context,
+                  duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+              Navigator.of(context).pop();
+            });
           }
         },
         child: Text("Crear",

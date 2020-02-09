@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:tienda_virtual/compra.dart';
 import 'package:tienda_virtual/modelo.dart';
 import 'package:tienda_virtual/servicios.dart';
 
@@ -35,7 +36,14 @@ class PageCompras extends StatelessWidget {
                     subtitle: Text(
                       "\$"+compra.total.toString(),
                     ),
-
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PageCompra(cliente: cliente,compra: compra,),
+                        ),
+                      );
+                    },
                   );
                 },
               );

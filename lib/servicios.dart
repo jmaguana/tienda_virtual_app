@@ -18,8 +18,8 @@ Future<Cliente> login(String correo, String contrasenia) async {
   }
 }
 
-Future<List<Cliente>> listarCliente() async {
-  final response = await http.get(servicioUrl+'clientes/listar');
+Future<List<Cliente>> listarCliente(int id) async {
+  final response = await http.get(servicioUrl+'clientes/listar/'+id.toString());
   var clientes = new List<Cliente>();
   if(response.statusCode == 200){
     Iterable list = json.decode(response.body);
@@ -39,6 +39,27 @@ Future<List<Producto>> listarProducto() async {
     return productos;
   }else{
     throw Exception('Fallo cargando Productos');
+  }
+}
+
+Future<List<Producto>> listarCompartido(int id) async {
+  final response = await http.get(servicioUrl+'clientes/listacompartido/'+id.toString());
+  List<Producto> productos = new List<Producto>();
+  if(response.statusCode == 200){
+    Iterable list = json.decode(response.body);
+    productos = list.map((model) => Producto.fromJson(model)).toList();
+    return productos;
+  }else{
+    throw Exception('Fallo cargando Compartidos');
+  }
+}
+
+Future<int> numeroCompartido(int id) async {
+  final response = await http.get(servicioUrl+'clientes/numerocompartido/'+id.toString());
+  if(response.statusCode == 200){
+    return int.parse(response.body);
+  }else{
+    return 0;
   }
 }
 
@@ -67,7 +88,7 @@ Future<List<Compra>> listarCompras(int id) async {
 }
 
 Future<List<Producto>> listarProductosCompra(int id) async{
-  final response = await http.get(servicioUrl+'compras/listar/'+id.toString());
+  final response = await http.get(servicioUrl+'compras/listarproducto/'+id.toString());
   List<Producto> productos = new List<Producto>();
   if(response.statusCode == 200){
     Iterable list = json.decode(response.body);
@@ -132,7 +153,6 @@ Future<void> darLike(int idClinete, int idProducto, bool isLiked) async{
 Future<void> agregarCarrito(int cantidad, int codigoProducto, int codigoCliente) async{
   final response = await http.get(servicioUrl+'carrito/insertar/'+codigoCliente.toString()+'/'+codigoProducto.toString()+'/'+cantidad.toString());
   if(response.statusCode == 200){
-
   }else{
     throw Exception('Fallo agregando a carrito');
   }
@@ -154,4 +174,26 @@ Future<void> crearClientePOST( Cliente cliente) async {
   print('Response body: ${response.body}');
   int statusCode = response.statusCode;
   String responseBody = response.body;
+}
+
+Future<void> eliminarCarrito(int codigoProducto, int codigoCliente) async{
+  final response = await http.get(servicioUrl+'carrito/eliminar/'+codigoCliente.toString()+'/'+codigoProducto.toString());
+  if(response.statusCode == 200){
+    if(response.body.length == 0){
+      print(response.body);
+    }
+  }else{
+    throw Exception('Fallo agregando a carrito');
+  }
+}
+
+Future<void> compartir(int emisor, int recetor, int producto) async{
+  final response = await http.get(servicioUrl+'clientes/compartir/'+emisor.toString()+"/"+recetor.toString()+"/"+producto.toString());
+  if(response.statusCode == 200){
+    if(response.body.length == 0){
+      print(response.body);
+    }
+  }else{
+    throw Exception('Fallo compartiendo');
+  }
 }

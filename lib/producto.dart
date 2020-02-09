@@ -16,7 +16,6 @@ class PageProducto extends StatefulWidget {
   @override
     _FavoriteWidgetState createState() => _FavoriteWidgetState(producto, cliente);
 
-
 }
 
 class _FavoriteWidgetState extends State<PageProducto> {

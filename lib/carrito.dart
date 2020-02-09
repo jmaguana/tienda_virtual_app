@@ -34,14 +34,14 @@ class _pageCarrito extends State<StatefulWidget> {
             onPressed: (){
               generarCompra(cliente.codigo).then((onValue){
                 print(onValue);
-                if(onValue == "OK"){
+                if(onValue == "ok"){
                   Toast.show(
                       "Se realizó la compra exitosamente", context,
                       duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   Navigator.of(context).pop();
                 }else{
                   Toast.show(
-                      "El stock no es suficiente.", context,
+                      "El stock no es suficiente: "+onValue, context,
                       duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                 }
 
@@ -110,6 +110,11 @@ class _pageCarrito extends State<StatefulWidget> {
                             new FlatButton(
                               onPressed: (){
                                 print("Eliminado");
+                                eliminarCarrito(producto.codigo, cliente.codigo);
+                                setState(() {
+
+                                });
+                                Navigator.of(context).pop();
                               },
                               child: new Text("eliminar"),
                             ),
