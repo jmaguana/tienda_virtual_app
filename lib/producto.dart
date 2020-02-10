@@ -70,7 +70,6 @@ class _FavoriteWidgetState extends State<PageProducto> {
 
 
   Widget titleSection(BuildContext context) {
-
     return Container(
       padding: const EdgeInsets.all(32),
       child: Row(
@@ -210,14 +209,17 @@ class _FavoriteWidgetState extends State<PageProducto> {
 
                         actions: <Widget>[
                           new FlatButton(
+
                             onPressed: () {
 
-                              agregarCarrito(_numeroProductos, producto.codigo, cliente.codigo);
-                              print(_numeroProductos);
-                              Toast.show(
-                                  "Se agregó "+producto.nombre+" al carrito.", context,
-                                  duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                              Navigator.of(context).pop();
+                              agregarCarrito(_numeroProductos, producto.codigo, cliente.codigo).then((onValue){
+                                print(_numeroProductos);
+                                Toast.show(
+                                    "Se agregó "+producto.nombre+" al carrito.", context,
+                                    duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                                Navigator.of(context).pop();
+                              });
+
                             },
                             child: new Text(
                               "Agregar",

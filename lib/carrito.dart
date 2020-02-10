@@ -149,10 +149,7 @@ class _pageCarrito extends State<StatefulWidget> {
 
         ),
       ),
-      
-      /*floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.delete_forever),
-      ),*/
+
     );
   }
 

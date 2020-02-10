@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tienda_virtual/buscar.dart';
 import 'package:tienda_virtual/cliente.dart';
 import 'package:tienda_virtual/compartidos.dart';
 import 'package:tienda_virtual/modelo.dart';
@@ -40,7 +41,18 @@ class _PageInicio extends State<PageInicio> {
       appBar: new AppBar(
         title: Text(cliente.nombre),
         actions: <Widget>[
-
+          IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
+              ),
+              onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PageBuscar(cliente: cliente,))
+                );
+              }
+          ),
           IconButton(
               icon: Icon(
                 Icons.shopping_cart,

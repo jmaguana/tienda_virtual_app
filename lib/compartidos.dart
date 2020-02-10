@@ -37,7 +37,7 @@ class PageCompartidos extends StatelessWidget {
 
                   ),
                   subtitle: Text(
-                    "Compartido por: "+producto.nombrecompartido+", "+producto.correocompartido,
+                    "Compartido por: " +producto.correocompartido,
                     style: TextStyle(
                       color: Colors.green,
                     ),

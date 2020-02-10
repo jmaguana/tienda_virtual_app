@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:tienda_virtual/modelo.dart';
 
-final servicioUrl = 'http://192.168.0.106:8080/tienda-virtual/srv/';
-
+final servicioUrl = 'http://35.237.19.67:80/tienda-virtual/srv/';
+//35.237.19.67/tienda-virtual/srv/clientes/listar/10
 Future<Cliente> login(String correo, String contrasenia) async {
   String aux = servicioUrl+'clientes/login/'+correo.replaceAll(" ", "")+"/"+contrasenia;
   print(aux);

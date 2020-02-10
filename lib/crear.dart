@@ -2,88 +2,87 @@ import 'package:flutter/material.dart';
 import 'package:tienda_virtual/modelo.dart';
 import 'package:tienda_virtual/servicios.dart';
 import 'package:toast/toast.dart';
-
+/*
 class PageCrear extends StatefulWidget {
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
-}
+}*/
+class PageCrear extends StatelessWidget{
 
-class _MyHomePageState extends State<PageCrear> {
-  TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 18.0);
-  // final myController = TextEditingController();
+  final nombreField = TextField(
+    controller: TextEditingController(),
+    obscureText: false,
+    style: TextStyle(fontFamily: 'Montserrat', fontSize: 18.0),
+    decoration: InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        hintText: "Nombre",
+        border:
+        OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+  );
+
+  final confirmarField = TextField(
+    controller: TextEditingController(),
+    obscureText: true,
+    style: TextStyle(fontFamily: 'Montserrat', fontSize: 18.0),
+    decoration: InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        hintText: "Confirmar Contraseña",
+        border:
+        OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+  );
+
+  final telefonoField = TextField(
+    controller: TextEditingController(),
+    obscureText: false,
+    style:TextStyle(fontFamily: 'Montserrat', fontSize: 18.0),
+    decoration: InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        hintText: "Telefono",
+        border:
+        OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+  );
+
+
+  final apellidoField = TextField(
+    controller: TextEditingController(),
+    obscureText: false,
+    style: TextStyle(fontFamily: 'Montserrat', fontSize: 18.0),
+    decoration: InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        hintText: "Apellido",
+        border:
+        OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+  );
+
+
+  final emailField = new TextField(
+    controller: TextEditingController(),
+    obscureText: false,
+    style: TextStyle(fontFamily: 'Montserrat', fontSize: 18.0),
+    decoration: InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        hintText: "Correo",
+        border:
+        OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+  );
+
+  final passwordField = new TextField(
+    controller: TextEditingController(),
+    obscureText: true,
+    style: TextStyle(fontFamily: 'Montserrat', fontSize: 18.0),
+    decoration: InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        hintText: "Contraseña",
+        border:
+        OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
+  );
+
 
   @override
   Widget build(BuildContext context) {
 
 
-    final nombreField = TextField(
-      controller: TextEditingController(),
-      obscureText: false,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Nombre",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
-    final confirmarField = TextField(
-      controller: TextEditingController(),
-      obscureText: true,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Confirmar Contraseña",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
-    final telefonoField = TextField(
-      controller: TextEditingController(),
-      obscureText: false,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Telefono",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
-
-    final apellidoField = TextField(
-      controller: TextEditingController(),
-      obscureText: false,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Apellido",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
-
-    final emailField = TextField(
-      controller: TextEditingController(),
-      obscureText: false,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Correo",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
-
-    final passwordField = TextField(
-      controller: TextEditingController(),
-      obscureText: true,
-      style: style,
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-          hintText: "Contraseña",
-          border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-    );
 
     final crearButton = Material(
       elevation: 5.0,
@@ -114,7 +113,7 @@ class _MyHomePageState extends State<PageCrear> {
         },
         child: Text("Crear",
             textAlign: TextAlign.center,
-            style: style.copyWith(
+            style: TextStyle(fontFamily: 'Montserrat', fontSize: 18.0).copyWith(
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
@@ -135,7 +134,7 @@ class _MyHomePageState extends State<PageCrear> {
                     SizedBox(
                       height: 155.0,
 
-                      child: Image.network("https://scontent.fcue3-1.fna.fbcdn.net/v/t1.0-9/83779753_2705587112851892_785769828785848320_n.jpg?_nc_cat=107&_nc_oc=AQlutAnIEKeH-Ahfi82HIv4ekR58iaef_I1NChcJu3F6inMEGQ7i0pmidZ1wcdEhGSI&_nc_ht=scontent.fcue3-1.fna&oh=d5f03868c32623da6de2e450999cfada&oe=5EBE1CFF",
+                      child: Image.asset('assets/logo.jpeg',
                         fit: BoxFit.contain,
                       ),
                     ),
