@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tienda_virtual/comprar.dart';
 import 'package:tienda_virtual/modelo.dart';
 import 'package:tienda_virtual/servicios.dart';
 import 'package:toast/toast.dart';
@@ -32,7 +33,11 @@ class _pageCarrito extends State<StatefulWidget> {
               color: Colors.white,
             ),
             onPressed: (){
-              generarCompra(cliente.codigo).then((onValue){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PageComprar(cliente: cliente,))
+              );
+             /* generarCompra(cliente.codigo).then((onValue){
                 print(onValue);
                 if(onValue == "ok"){
                   Toast.show(
@@ -46,7 +51,7 @@ class _pageCarrito extends State<StatefulWidget> {
                 }
 
 
-              });
+              });*/
               
               //Toast
             },
@@ -63,7 +68,7 @@ class _pageCarrito extends State<StatefulWidget> {
         future: listarProductoCarrito(cliente.codigo),
         builder: (context, snapshot){
           if(snapshot.hasData){
-            return ListView.builder(
+             return ListView.builder(
               itemCount: snapshot.data.length,
                 itemBuilder: (BuildContext context, int index){
                   var producto = snapshot.data[index];
@@ -78,14 +83,14 @@ class _pageCarrito extends State<StatefulWidget> {
                       producto.cantidad == 1 ? producto.nombre+": "+producto.cantidad.toString()+" unidad": producto.nombre+": "+producto.cantidad.toString()+" unidades",
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.black54
+                          color: producto.hayStock ?  Colors.black54 : Colors.red
                       ),
 
                     ),
                     subtitle: Text(
-                      '\$'+producto.precio.toString(),
+                      producto.hayStock ? '\$'+producto.precio.toString(): '\$'+producto.precio.toString()+" No hay suficiente Stock",
                       style: TextStyle(
-                        color: Colors.green,
+                        color: producto.hayStock ? Colors.green : Colors.red,
                       ),
                       maxLines: 1,
                     ),
@@ -105,7 +110,7 @@ class _pageCarrito extends State<StatefulWidget> {
                             ],
 
                           ),
-                          content: new Text("nombre Producto"),
+                          content: new Text(producto.nombre),
                           actions: <Widget>[
                             new FlatButton(
                               onPressed: (){
@@ -145,9 +150,9 @@ class _pageCarrito extends State<StatefulWidget> {
         ),
       ),
       
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.delete_forever),
-      ),
+      ),*/
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tienda_virtual/cliente.dart';
 import 'package:tienda_virtual/compartidos.dart';
 import 'package:tienda_virtual/modelo.dart';
 import 'package:tienda_virtual/producto.dart';
@@ -123,9 +124,10 @@ class _PageInicio extends State<PageInicio> {
                 color: Colors.white,
               ),
               onPressed: (){
-                print("Compartidos");
-                Route route = MaterialPageRoute(builder: (context)=> MyApp());
-                Navigator.pushReplacement(context, route);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => PageCliente(cliente: cliente,))
+                );
               }
           ),
         ],

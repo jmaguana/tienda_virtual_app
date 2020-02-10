@@ -197,3 +197,12 @@ Future<void> compartir(int emisor, int recetor, int producto) async{
     throw Exception('Fallo compartiendo');
   }
 }
+
+Future<Compra> preCompra(int id) async{
+  final response = await http.get(servicioUrl+'compras/precompra/'+id.toString());
+  if(response.statusCode == 200){
+    return Compra.fromJson(json.decode(response.body));
+  }else{
+    throw Exception('Fallo agregando a carrito');
+  }
+}

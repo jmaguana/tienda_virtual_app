@@ -16,7 +16,7 @@ class Cliente{
     return Cliente(
       codigo: json['codigo'],
       nombre: json['nombre'],
-      apellido: json['apellido'],
+      apellido: json['apellidos'],
       correo: json['correo'],
       imagen: json['correo'],
       fechaNacimiento: json['fechaNacimiento'],
@@ -45,8 +45,9 @@ class Producto{
   final bool isLike;
   final String nombrecompartido;
   final String correocompartido;
+  final bool hayStock;
 
-  Producto({this.codigo,this.nombre, this.descripcion, this.imagen, this.precio,this.categoria, this.votos, this.cantidad, this.isLike, this.nombrecompartido, this.correocompartido});
+  Producto({this.codigo,this.nombre, this.descripcion, this.imagen, this.precio,this.categoria, this.votos, this.cantidad, this.isLike, this.nombrecompartido, this.correocompartido, this.hayStock});
 
   factory Producto.fromJson(Map<String, dynamic> json){
     return Producto(
@@ -60,7 +61,8 @@ class Producto{
         cantidad: json['cantidad'],
         isLike: json['isLiked'],
         nombrecompartido: json['nombreCompartido'],
-        correocompartido: json['correoCompartido']
+        correocompartido: json['correoCompartido'],
+      hayStock: json['hayStock']
     );
   }
 }
